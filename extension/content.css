@@ -127,6 +127,13 @@
     display: none !important;
 }
 
+/* Must beat ID selectors — use ID+class for guaranteed override */
+#__lf-locator-section.__lf-hidden,
+#__lf-scan-section.__lf-hidden,
+#__lf-element-info.__lf-hidden {
+    display: none !important;
+}
+
 /* ── Header (Drag Handle) ───────────────────────────────── */
 .__lf-header {
     display: flex !important;
