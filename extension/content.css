@@ -123,16 +123,6 @@
         0 0 0 1px rgba(0, 0, 0, 0.06) !important;
 }
 
-.__lf-hidden {
-    display: none !important;
-}
-
-/* Must beat ID selectors — use ID+class for guaranteed override */
-#__lf-locator-section.__lf-hidden,
-#__lf-scan-section.__lf-hidden,
-#__lf-element-info.__lf-hidden {
-    display: none !important;
-}
 
 /* ── Header (Drag Handle) ───────────────────────────────── */
 .__lf-header {
@@ -796,7 +786,6 @@
 /* ── Empty State ─────────────────────────────────────────── */
 .__lf-empty {
     flex: 1 !important;
-    display: flex !important;
     flex-direction: column !important;
     align-items: center !important;
     justify-content: center !important;
@@ -838,4 +827,14 @@
 .__lf-toast.__lf-hidden {
     opacity: 0 !important;
     pointer-events: none !important;
+}
+
+/* ── MASTER HIDDEN — MUST BE LAST RULE IN FILE ──────────── */
+/* Placed at the end so it always wins over any display rule above */
+.__lf-hidden,
+#__lf-locator-section.__lf-hidden,
+#__lf-scan-section.__lf-hidden,
+#__lf-element-info.__lf-hidden,
+#__lf-empty.__lf-hidden {
+    display: none !important;
 }
