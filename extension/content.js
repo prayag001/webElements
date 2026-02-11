@@ -32,7 +32,7 @@
           </svg>
           <span class="__lf-title">Locator Finder</span>
           <span class="__lf-drag-hint">⠀⠀⠀ drag</span>
-          <span class="__lf-resize-hint">Ctrl+Scroll to resize</span>
+          <span class="__lf-resize-hint">Scroll here to resize</span>
         </div>
         <div class="__lf-header-right">
           <button id="__lf-btn-theme" class="__lf-icon-btn" title="Toggle theme">🌙</button>
@@ -225,10 +225,7 @@
     const MAX_SCALE = 1.6;
     const SCALE_STEP = 0.05;
 
-    panel.addEventListener('wheel', (e) => {
-        // Only resize when Ctrl is held
-        if (!e.ctrlKey) return;
-
+    function applyResize(e) {
         e.preventDefault();
         e.stopPropagation();
 
@@ -239,6 +236,15 @@
 
         const pct = Math.round(currentScale * 100);
         log('info', `Panel size: ${pct}%`);
+    }
+
+    // Scroll on header = resize (no Ctrl needed)
+    dragHandle.addEventListener('wheel', applyResize, { passive: false });
+
+    // Ctrl+Scroll anywhere on panel = resize
+    panel.addEventListener('wheel', (e) => {
+        if (!e.ctrlKey) return;
+        applyResize(e);
     }, { passive: false });
 
     /* ═══════════════════════════════════════════════════════════

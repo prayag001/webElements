@@ -323,6 +323,25 @@
     flex-shrink: 0 !important;
 }
 
+/* Locator & Scan sections MUST shrink so bottom bar stays visible */
+#__lf-locator-section {
+    flex: 1 1 0px !important;
+    min-height: 80px !important;
+    overflow: hidden !important;
+    display: flex !important;
+    flex-direction: column !important;
+    padding-bottom: 0 !important;
+}
+
+#__lf-scan-section {
+    flex: 1 1 0px !important;
+    min-height: 80px !important;
+    overflow: hidden !important;
+    display: flex !important;
+    flex-direction: column !important;
+    padding-bottom: 0 !important;
+}
+
 .__lf-section-label {
     font-size: calc(10px * var(--scale)) !important;
     font-weight: 700 !important;
@@ -386,10 +405,10 @@
 
 /* ── Locator List ────────────────────────────────────────── */
 .__lf-locator-list {
-    flex: 1 1 auto !important;
+    flex: 1 1 0px !important;
     overflow-y: auto !important;
     padding: 6px 10px 10px !important;
-    min-height: 60px !important;
+    min-height: 0 !important;
 }
 
 .__lf-locator-list::-webkit-scrollbar {
@@ -560,10 +579,10 @@
 }
 
 .__lf-scan-list {
-    flex: 1 1 auto !important;
+    flex: 1 1 0px !important;
     overflow-y: auto !important;
     padding: 6px 10px 10px !important;
-    min-height: 60px !important;
+    min-height: 0 !important;
 }
 
 .__lf-scan-list::-webkit-scrollbar {
@@ -674,8 +693,8 @@
 .__lf-log-section {
     border-top: 1px solid var(--border) !important;
     flex: 0 0 auto !important;
-    min-height: 32px !important;
-    max-height: calc(160px * var(--scale)) !important;
+    min-height: 30px !important;
+    max-height: calc(140px * var(--scale)) !important;
     overflow: hidden !important;
     display: flex !important;
     flex-direction: column !important;
