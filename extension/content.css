@@ -320,19 +320,10 @@
     flex-shrink: 0 !important;
 }
 
-/* Locator & Scan sections MUST shrink so bottom bar stays visible */
-#__lf-locator-section {
-    flex: 1 1 0px !important;
-    min-height: 80px !important;
-    overflow: hidden !important;
-    display: flex !important;
-    flex-direction: column !important;
-    padding-bottom: 0 !important;
-}
-
+/* Locator & Scan sections: can shrink, flex column for internal scroll */
+#__lf-locator-section,
 #__lf-scan-section {
-    flex: 1 1 0px !important;
-    min-height: 80px !important;
+    flex-shrink: 1 !important;
     overflow: hidden !important;
     display: flex !important;
     flex-direction: column !important;
@@ -402,10 +393,9 @@
 
 /* ── Locator List ────────────────────────────────────────── */
 .__lf-locator-list {
-    flex: 1 1 0px !important;
+    max-height: calc(300px * var(--scale)) !important;
     overflow-y: auto !important;
     padding: 6px 10px 10px !important;
-    min-height: 0 !important;
 }
 
 .__lf-locator-list::-webkit-scrollbar {
@@ -576,10 +566,9 @@
 }
 
 .__lf-scan-list {
-    flex: 1 1 0px !important;
+    max-height: calc(320px * var(--scale)) !important;
     overflow-y: auto !important;
     padding: 6px 10px 10px !important;
-    min-height: 0 !important;
 }
 
 .__lf-scan-list::-webkit-scrollbar {
@@ -689,17 +678,16 @@
 /* ── Log Panel ───────────────────────────────────────────── */
 .__lf-log-section {
     border-top: 1px solid var(--border) !important;
-    flex: 0 0 auto !important;
-    min-height: 30px !important;
-    max-height: calc(140px * var(--scale)) !important;
+    flex-shrink: 0 !important;
+    max-height: 28px !important;
     overflow: hidden !important;
     display: flex !important;
     flex-direction: column !important;
+    transition: max-height 0.2s ease !important;
 }
 
 .__lf-log-section.__lf-log-expanded {
-    flex: 0 0 auto !important;
-    max-height: calc(220px * var(--scale)) !important;
+    max-height: calc(140px * var(--scale)) !important;
 }
 
 .__lf-log-header {
@@ -786,7 +774,6 @@
 /* ── Empty State ─────────────────────────────────────────── */
 .__lf-empty {
     flex: 1 !important;
-    flex-direction: column !important;
     align-items: center !important;
     justify-content: center !important;
     gap: 10px !important;
