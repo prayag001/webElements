@@ -31,7 +31,8 @@
             <circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/>
           </svg>
           <span class="__lf-title">Locator Finder</span>
-          <span class="__lf-drag-hint">⠿ drag</span>
+          <span class="__lf-drag-hint">⠀⠀⠀ drag</span>
+          <span class="__lf-resize-hint">Ctrl+Scroll to resize</span>
         </div>
         <div class="__lf-header-right">
           <button id="__lf-btn-theme" class="__lf-icon-btn" title="Toggle theme">🌙</button>
@@ -216,6 +217,31 @@
     document.addEventListener('mouseup', onDragEnd);
 
     /* ═══════════════════════════════════════════════════════════
+       4b. SCROLL-TO-RESIZE
+       ═══════════════════════════════════════════════════════════ */
+
+    let currentScale = 1;
+    const MIN_SCALE = 0.6;
+    const MAX_SCALE = 1.6;
+    const SCALE_STEP = 0.05;
+
+    panel.addEventListener('wheel', (e) => {
+        // Only resize when Ctrl is held
+        if (!e.ctrlKey) return;
+
+        e.preventDefault();
+        e.stopPropagation();
+
+        const delta = e.deltaY > 0 ? -SCALE_STEP : SCALE_STEP;
+        currentScale = Math.max(MIN_SCALE, Math.min(MAX_SCALE, currentScale + delta));
+
+        panel.style.setProperty('--scale', currentScale.toFixed(2));
+
+        const pct = Math.round(currentScale * 100);
+        log('info', `Panel size: ${pct}%`);
+    }, { passive: false });
+
+    /* ═══════════════════════════════════════════════════════════
        5. LOGGING
        ═══════════════════════════════════════════════════════════ */
 
@@ -237,6 +263,14 @@
     $('__lf-log-clear').addEventListener('click', (e) => {
         e.stopPropagation();
         logList.innerHTML = '';
+    });
+
+    // Toggle log expansion on header click
+    $('__lf-log-toggle').addEventListener('click', (e) => {
+        // Ignore if clicking the clear button
+        if (e.target.closest('.__lf-log-clear')) return;
+        const section = $('__lf-log-section');
+        section.classList.toggle('__lf-log-expanded');
     });
 
     log('info', `Locator Finder v2.0 loaded — ID: ${EXT_ID}`);
